@@ -45,7 +45,7 @@ def getPositivesAndNegatives(sampleId, tb):
     posResults = tb.querys("pos:" + sampleId + "-" + sampleId)
     positives = []
     for p in posResults:
-        positives.append(p[3])
+        positives.append(p[3] + "+")
     positives = set(positives)
     negResults = tb.querys("neg:" + sampleId + "-" + sampleId)
     negatives = []
@@ -53,7 +53,7 @@ def getPositivesAndNegatives(sampleId, tb):
         if len(n) < 4:
             print('negative results too few rows',n)
         else:
-            negatives.append(n[3])
+            negatives.append(n[3] + "-")
     negatives = set(negatives)
     return list(positives) + list(negatives)
 
@@ -76,7 +76,10 @@ def findClade(snps):
 
 cladeMap = {}
 for theid in ids:
-    cladeMap[theid] = findClade(getPositivesAndNegatives(theid, tb))
+    positivesAndNegatives = getPositivesAndNegatives(theid, tb)
+    clade = findClade(positivesAndNegatives)
+    print(theid + " of " + len(ids) + ": found clade " + clade)
+    cladeMap[theid] = clade
 
 allEnd = time.time()
 print('clade finder executed on ' + str(len(ids)) + ' ' + str(round((allEnd-allStart)/60,2)) + " minutes\n")
