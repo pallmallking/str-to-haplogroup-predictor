@@ -78,7 +78,7 @@ cladeMap = {}
 for theid in ids:
     positivesAndNegatives = getPositivesAndNegatives(theid, tb)
     clade = findClade(positivesAndNegatives)
-    print(theid + " of " + len(ids) + ": found clade " + clade)
+    print(str(theid) + " of " + len(ids) + ": found clade " + clade)
     cladeMap[theid] = clade
 
 allEnd = time.time()
