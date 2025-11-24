@@ -1,0 +1,8 @@
+name: str-to-haplogroup-predictor
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - numpy
+  - pandas
+  # Add any other dependencies your project needs
